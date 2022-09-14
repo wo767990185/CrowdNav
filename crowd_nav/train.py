@@ -15,7 +15,7 @@ from crowd_nav.policy.policy_factory import policy_factory
 
 
 def main():
-    parser = argparse.ArgumentParser('Parse configuration file')
+    parser = argparse.ArgumentParser('Parse configuration file')#解析配置文件
     parser.add_argument('--env_config', type=str, default='configs/env.config')
     parser.add_argument('--policy', type=str, default='cadrl')
     parser.add_argument('--policy_config', type=str, default='configs/policy.config')
@@ -158,7 +158,7 @@ def main():
         if episode % evaluation_interval == 0:
             explorer.run_k_episodes(env.case_size['val'], 'val', episode=episode)
 
-        # sample k episodes into memory and optimize over the generated memory
+        # sample k episodes into memory and optimize over the generated memory 将k情节示例到内存，并在生成的内存上进行优化
         explorer.run_k_episodes(sample_episodes, 'train', update_memory=True, episode=episode)
         trainer.optimize_batch(train_batches)
         episode += 1
