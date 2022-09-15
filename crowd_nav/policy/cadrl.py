@@ -82,6 +82,7 @@ class CADRL(Policy):
     def build_action_space(self, v_pref):
         """
         Action space consists of 25 uniformly sampled actions in permitted range and 25 randomly sampled actions.
+        动作空间由允许范围内的25个均匀采样动作和25个随机采样动作组成。
         """
         holonomic = True if self.kinematics == 'holonomic' else False
         speeds = [(np.exp((i + 1) / self.speed_samples) - 1) / (np.e - 1) * v_pref for i in range(self.speed_samples)]
