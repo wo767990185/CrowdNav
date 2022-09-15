@@ -132,10 +132,10 @@ class CADRL(Policy):
     def predict(self, state):
         """
         Input state is the joint state of robot concatenated by the observable state of other agents
-
+        输入状态是机器人的联合状态，由其他代理的可观察状态串联起来
         To predict the best action, agent samples actions and propagates one step to see how good the next state is
         thus the reward function is needed
-
+        为了预测最佳操作，代理对操作进行采样并传播一步，以查看下一个状态的好坏，因此需要奖励函数
         """
         if self.phase is None or self.device is None:
             raise AttributeError('Phase, device attributes have to be set!')
