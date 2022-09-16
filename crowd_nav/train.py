@@ -17,13 +17,13 @@ from crowd_nav.policy.policy_factory import policy_factory
 def main():
     parser = argparse.ArgumentParser('Parse configuration file')#解析配置文件
     parser.add_argument('--env_config', type=str, default='configs/env.config')
-    parser.add_argument('--policy', type=str, default='lstm_rl')
+    parser.add_argument('--policy', type=str, default='cadrl')
     parser.add_argument('--policy_config', type=str, default='configs/policy.config')
     parser.add_argument('--train_config', type=str, default='configs/train.config')
     parser.add_argument('--output_dir', type=str, default='data/output')
     parser.add_argument('--weights', type=str)
     parser.add_argument('--resume', default=False, action='store_true')
-    parser.add_argument('--gpu', default=True, action='store_true')
+    parser.add_argument('--gpu', default=False, action='store_true')
     parser.add_argument('--debug', default=False, action='store_true')
     args = parser.parse_args()
 

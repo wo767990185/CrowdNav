@@ -24,8 +24,9 @@ class ValueNetwork1(nn.Module):
         size = state.shape
         self_state = state[:, 0, :self.self_state_dim]
         # human_state = state[:, :, self.self_state_dim:]
-        h0 = torch.zeros(1, size[0], self.lstm_hidden_dim)
-        c0 = torch.zeros(1, size[0], self.lstm_hidden_dim)
+        self.device="cuda"
+        h0 = torch.zeros(1, size[0], self.lstm_hidden_dim).to(self.device)
+        c0 = torch.zeros(1, size[0], self.lstm_hidden_dim).to(self.device)
         output, (hn, cn) = self.lstm(state, (h0, c0))
         hn = hn.squeeze(0)
         joint_state = torch.cat([self_state, hn], dim=1)
@@ -53,11 +54,11 @@ class ValueNetwork2(nn.Module):
         self_state = state[:, 0, :self.self_state_dim]
 
         state = torch.reshape(state, (-1, size[2]))
-        mlp1_output = self.mlp1(state)
+        mlp1_output = self.mlp1(state).to(self.device)
         mlp1_output = torch.reshape(mlp1_output, (size[0], size[1], -1))
 
-        h0 = torch.zeros(1, size[0], self.lstm_hidden_dim)
-        c0 = torch.zeros(1, size[0], self.lstm_hidden_dim)
+        h0 = torch.zeros(1, size[0], self.lstm_hidden_dim).to(self.device)
+        c0 = torch.zeros(1, size[0], self.lstm_hidden_dim).to(self.device)
         output, (hn, cn) = self.lstm(mlp1_output, (h0, c0))
         hn = hn.squeeze(0)
         joint_state = torch.cat([self_state, hn], dim=1)
